@@ -1,3 +1,5 @@
+require "pry"
+
 class ApplicationController < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   set :views, Proc.new { File.join(root, "../views/") }
@@ -18,6 +20,7 @@ class ApplicationController < Sinatra::Base
 
   post '/registrations' do
     @user = User.new(name: params["name"], email: params["email"], password: params["password"])
+binding.pry
     @user.save
     session[:user_id] = @user.id
 
